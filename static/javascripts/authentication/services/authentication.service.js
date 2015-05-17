@@ -45,12 +45,38 @@
          * @memberOf thinkster.authentication.services.Authentication
          */
 
-        function register(email, password, username) {
-            return $http.post('/api/v1/accounts/', {
-                username: username,
-                password: password,
-                email: email
-            });
+        function register(email, password, name, address, city, state, zip, country, phone, occupation, companyname) {
+            console.log(name);
+          return $http.post('/api/v1/accounts/', {
+            username: email,
+            password: password,
+            email: email,
+            first_name: name,
+            address: address,
+            city: city,
+            state: state,
+            zip: zip,
+            country: country,
+            phone: phone,
+            occupation: occupation,
+            company_name: companyname
+          }).then(registerSuccessFn, registerErrorFn);
+
+          /**
+          * @name registerSuccessFn
+          * @desc Log the new user in
+          */
+          function registerSuccessFn(data, status, headers, config) {
+            Authentication.login(email, password);
+          }
+
+          /**
+          * @name registerErrorFn
+          * @desc Log "Epic failure!" to the console
+          */
+          function registerErrorFn(data, status, headers, config) {
+            console.error('Epic failure!');
+          }
         }
 
         /**
