@@ -35,19 +35,19 @@ class Account(AbstractBaseUser):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=40, unique=True)
 
-    first_name = models.CharField(max_length=40, blank=True)
-    last_name = models.CharField(max_length=40, blank=True)
+    first_name = models.CharField(max_length=40, blank=True, null=True)
+    last_name = models.CharField(max_length=40, blank=True, null=True)
 
-    address = models.CharField(max_length=150, blank=True)
-    city = models.CharField(max_length=50, blank=True)
-    state = models.CharField(max_length=50, blank=True)
-    zip_code = models.IntegerField(default=0, blank=True)
-    country = models.CharField(max_length=30, blank=True)
+    address = models.CharField(max_length=150, blank=True, null=True)
+    city = models.CharField(max_length=50, blank=True, null=True)
+    state = models.CharField(max_length=50, blank=True, null=True)
+    zip_code = models.IntegerField(default=0, blank=True, null=True)
+    country = models.CharField(max_length=30, blank=True, null=True)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
                                  message="Phone number must be entered in format: '+999999999'. Max 15 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex], blank=True, max_length=15)  # validators should be a list
-    occupation = models.CharField(max_length=100, blank=True)
-    company_name = models.CharField(max_length=100, blank=True)
+    phone_number = models.CharField(validators=[phone_regex], blank=True, max_length=15, null=True)  # validators should be a list
+    occupation = models.CharField(max_length=100, blank=True, null=True)
+    company_name = models.CharField(max_length=100, blank=True, null=True)
 
     is_admin = models.BooleanField(default=False)
 
