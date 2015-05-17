@@ -20,6 +20,10 @@
           controller: 'LoginController',
           controllerAs: 'vm',
           templateUrl: '/static/templates/authentication/login.html'
+      }).when('/add_route', {
+          controller: '',
+          controllerAs: 'vm',
+          templateUrl: '/static/templates/route/add_route.html'
         }).otherwise('/');
     }
 })();
